@@ -1,6 +1,18 @@
+using Microsoft.Extensions.DependencyInjection;
+using WebApiMongoDB.Data;
+using WebApiMongoDB.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//configuring the DatabaseSettings class with values from the ConnectionStrings section of the appsettings.json file.
+//This allows you to inject DatabaseSettings into your services and access database connection settings easily.
+builder.Services.Configure<DatabaseSettings>(
+        builder.Configuration.GetSection("ConnectionStrings"));
+
+//making StudentServices available for dependency injection throughout your application.
+//Singleton services are created once and shared throughout the application's lifetime.
+builder.Services.AddSingleton<StudentServices>();
 
 builder.Services.AddControllersWithViews();
 

@@ -41,6 +41,7 @@ namespace WebApiMongoDB.Controllers
                 TemperatureC = Random.Shared.Next(-20, 55),
                 City = Cities[Random.Shared.Next(Cities.Length)],
                 Country = Countries[Random.Shared.Next(Countries.Length)],
+                Region = Random.Shared.Next(10,100),
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
