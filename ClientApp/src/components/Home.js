@@ -40,7 +40,7 @@ export default function Home()
             <tbody>
                 {students.length === 0 ? (
                   <tr className="row waiting">
-                    <td colSpan="7">Loading...</td>
+                    <td colSpan="8">Loading...</td>
                   </tr>
                 ) : (
                 students.map(student=> <tr key={student.id}>
