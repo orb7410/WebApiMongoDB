@@ -1,4 +1,6 @@
 import '../custom.css';
+import { Link } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
 const entry = {
     id: "",
@@ -7,9 +9,25 @@ const entry = {
     department: "",
     className: "",
     gender: "",
-    age: "",
+    age: "", 
+    graduated: ""
 }
 export default function New (props) {
+
+    const addNewStudent = () => {
+        console.log("The New Student Is: ", entry)
+        fetch("api/student", {
+            method: "POST",
+            body:JSON.stringify(entry),
+            headers:{
+                "content-type": "application/json"
+            }
+        }).then(r=>{
+            console.log("Response from backend for adding new student", r)
+            window.location = "/"
+        }).catch(e=>console.log("Error adding new student: ", e))
+    }
+
 
     const newData = (e) => {
         const name = e.target.name;
@@ -23,13 +41,17 @@ export default function New (props) {
             val = Number(val)
         }
 
+        if(name === "isGraduates"){
+            val = val === "1" //if 1 then true
+        }
+
         entry[name] = val
         console.log("The New Student Is:", entry)
   }
   const ageOptions = [];
         for (let age = 17; age <= 120; age++) {
             ageOptions.push(<option value={age}>{age}</option>);
-    }
+        }
     return  (
         <section className="m-20">
             <h1>Add New Student</h1>
@@ -41,17 +63,17 @@ export default function New (props) {
 
             <div>
                 <label htmlFor="ln">Last Name</label>
-                <input type="text" name="lastName" id="fn" onChange={newData}/>
+                <input type="text" name="lastName" id="ln" onChange={newData}/>
             </div>
 
             <div>
                 <label htmlFor="dp">Department</label>
-                <input type="text" name="department" id="fn" onChange={newData}/>
+                <input type="text" name="department" id="dp" onChange={newData}/>
             </div>
 
             <div>
                 <label htmlFor="cn">Class Name</label>
-                <input type="text" name="className" id="fn" onChange={newData}/>
+                <input type="text" name="className" id="cn" onChange={newData}/>
             </div>
 
             <div>
@@ -64,7 +86,7 @@ export default function New (props) {
 
             <div>
                 <label htmlFor="age">Age</label>
-                <select type="text" name="age" id="fn" onChange={newData}>
+                <select type="text" name="age" id="age" onChange={newData}>
                     {ageOptions}    
                 </select>
             </div>
@@ -76,6 +98,11 @@ export default function New (props) {
                     <option value={0}>No</option>
                 </select> 
             </div>
+            <div className='add-cencel-new-btn'>
+                <Link to="/" className="cancel-btn">Cancel</Link>
+                <button className="add-btn" onClick={addNewStudent}>Add Student</button>
+            </div>
         </section>
+
     )
-}
+    }

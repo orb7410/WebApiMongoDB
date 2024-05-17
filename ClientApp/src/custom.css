@@ -48,5 +48,47 @@ th {
   margin: 20px;
 }
 
+.m-20 input {
+  margin-left: 20px;
+  border: none;
+  border-bottom: 1px solid gainsboro;
+}
+.m-20 select{
+  margin-left: 20px;
+}
+
+.add-cencel-new-btn {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-right: 20px;
+  width:fit-content;
+  padding: 20px;
+  display:flex ;
+}
+
+
+.cancel-btn{
+  background-color: red;
+  color: white;
+  padding: 9px;
+  border-radius: 4px;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.add-btn {
+  background-color: green;
+  color: white;
+  padding: 9px;
+  border-radius: 4px;
+  width:fit-content;
+
+}
+
+
 
 
