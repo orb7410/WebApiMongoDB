@@ -18,7 +18,7 @@ export default function New (props) {
         console.log("The New Student Is: ", entry)
         fetch("api/student", {
             method: "POST",
-            body:JSON.stringify(entry),
+            body:entry,
             headers:{
                 "content-type": "application/json"
             }
@@ -31,7 +31,7 @@ export default function New (props) {
 
     const newData = (e) => {
         const name = e.target.name;
-        const val = e.target.value
+        let  val = e.target.value
 
         if(name === "gender"){
             val = Number(val)
@@ -41,7 +41,7 @@ export default function New (props) {
             val = Number(val)
         }
 
-        if(name === "isGraduates"){
+        if(name === "graduated"){
             val = val === "1" //if 1 then true
         }
 
@@ -93,7 +93,7 @@ export default function New (props) {
             
             <div>
                 <label htmlFor="graduated">Graduated</label>
-                <select name="isGraduates" id="graduated" onChange={newData}>
+                <select name="graduated" id="graduated" onChange={newData}>
                     <option value={1}>Yes</option>
                     <option value={0}>No</option>
                 </select> 

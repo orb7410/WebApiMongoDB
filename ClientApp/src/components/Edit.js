@@ -24,7 +24,7 @@ export default function Edit (props) {
 
     const editStudent = () => {
         console.log("The Edited Student Is: ", entry)
-        fetch("api/student", {
+        fetch("api/student/"+id, {
             method: "PUT",
             body:JSON.stringify(entry),
             headers:{
@@ -39,7 +39,7 @@ export default function Edit (props) {
 
     const editedData = (e) => {
         const name = e.target.name;
-        const val = e.target.value
+        let val = e.target.value
 
         if(name === "gender"){
             val = Number(val)
@@ -51,13 +51,13 @@ export default function Edit (props) {
             setAge(val)
         }
 
-        if(name === "isGraduates"){
+        if(name === "graduated"){
             val = val === "1" //if 1 then true
             setGraduated(val)
         }
 
         entry[name] = val
-        console.log("The New Student Is:", entry)
+        console.log("The Edited Student Is:", entry)
     }
     const ageOptions = [];
         for (let age = 17; age <= 120; age++) {
@@ -68,15 +68,15 @@ export default function Edit (props) {
         let id_val = window.location.search
         if (id_val){
             id_val = id_val.split("=")[1]
-        setId(id_val)
-        fetch("api/student/"+id)
-        .then(r => r.json())
-        .then(d => {
-            setData(d);
-            setGender(d.gender);
-            setGraduated(d.graduated);
-            setAge(d.age);
-          console.log("the students are: ", d);
+            setId(id_val)
+            fetch("api/student/"+id_val)
+            .then(r => r.json())
+            .then(d => {
+                setData(d);
+                setGender(d.gender);
+                setGraduated(d.graduated);
+                setAge(d.age);
+            console.log("the students are: ", d);
         })
         .catch(e => console.log("the error getting student to update: ", e))
         }  
@@ -84,7 +84,7 @@ export default function Edit (props) {
 
     return  (
         <section className="m-20">
-            <h1>Adit Student</h1>
+            <h1>Edit Student</h1>
 
             <div>
                 <label htmlFor="fn">First Name</label>
@@ -123,8 +123,8 @@ export default function Edit (props) {
             
             <div>
                 <label htmlFor="graduated">Graduated</label>
-                <select name="isGraduates" id="graduated" defaultValue={graduated} onChange={editedData}>
-                    <option value={true}>Yes</option>
+                <select name="graduated" id="graduated" defaultValue={graduated} onChange={editedData}>
+                    <option value={true}>Yed</option>
                     <option value={false}>No</option>
                 </select> 
             </div>
