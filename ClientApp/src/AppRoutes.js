@@ -3,6 +3,7 @@
 import Home from "./components/Home";
 import New from "./components/New";
 import Edit from "./components/Edit";
+import Find from "./components/Find";
 
 const AppRoutes = [
   {
@@ -16,6 +17,10 @@ const AppRoutes = [
   {
     path: '/new',
     element: <New />
+  },
+  {
+    path: '/find',
+    element: <Find />
   }
 ];
 

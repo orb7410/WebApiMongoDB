@@ -4,6 +4,8 @@ import '../custom.css';
 export default function Home()
 {
   const [students, setStudents] = useState([]);
+
+  //uses when things are changing
   useEffect(() => {
     fetch("api/student")
       .then(r => r.json())
@@ -13,6 +15,8 @@ export default function Home()
       })
       .catch(e => console.log("the error fetching all students: ", e));
   }, []);
+
+  useEffect(() => {console.log("hello")}, [students]);
 
     return (
       <main>
@@ -33,6 +37,8 @@ export default function Home()
             <th>Class Name</th>
             <th>Gender</th>
             <th>Age</th>
+            <th>NickName</th>
+            <th>Picture</th>
             <th>Edit</th>
             <th>Delete</th>
             </tr>
@@ -51,6 +57,8 @@ export default function Home()
                     <td>{student.gender=== 0 ? "Female" : "Male"}</td>
                     <td>{student.isGraduated? "Yes" : "No"}</td>
                     <td>{student.age}</td>
+                    <td>{student.nickName}</td>
+                    <td><img src={student.picture} className="student-picture-img" alt="student-picture-img"/></td>
                     <td><a href={"/edit?id="+student.id}>Edit</a></td>
                     <td>Delete</td>
                     </tr>))

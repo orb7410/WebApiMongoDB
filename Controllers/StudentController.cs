@@ -37,6 +37,32 @@ namespace WebApiMongoDB.Controllers
             return student;
         }
 
+        // GET api/<StudentController>/5
+        [HttpGet("{name:Length(10)}")]
+        public async Task<ActionResult<Student>> GetByName(string firstName)
+        {
+            Student student = await _studentServices.GetAsyncByName(firstName);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            return student;
+        }
+
+        // GET api/<StudentController>/5
+        [HttpGet("{name:Length(10)}")]
+        public async Task<ActionResult<Student>> GetByNameAndLastName(string firstName, string lastName)
+        {
+            Student student = await _studentServices.GetAsyncByNameAndLastName(firstName, lastName);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            return student;
+        }
+
         // POST api/student
         [HttpPost]
         public async Task<ActionResult<Student>> Post(Student newStudent)

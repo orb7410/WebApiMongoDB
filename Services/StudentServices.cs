@@ -22,7 +22,12 @@ namespace WebApiMongoDB.Services
 
         public async Task<Student> GetAsync(string id) => await _studentCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
+        public async Task<Student> GetAsyncByName(string firstName) => await _studentCollection.Find(x => x.FirstName == firstName).FirstOrDefaultAsync();
 
+        public async Task<Student> GetAsyncByNameAndLastName(string firstName, string LastName)
+        {
+            return await _studentCollection.Find(x => x.FirstName == firstName && x.LastName == LastName).FirstOrDefaultAsync();
+        }  
         //add new student
         public async Task<Student> CreateAsync(Student newStudent)
         {
